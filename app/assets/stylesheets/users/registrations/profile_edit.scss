@@ -1,0 +1,64 @@
+.edit_wrapper {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.edit_user_title {
+    padding-top: 80px;
+}
+
+.edit_user {
+    width: 67%;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    padding: 55px;
+    background: #fafafa;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.field {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn_1 {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+  }
+
+.user_destroy_btn {
+    margin-top: 45px;
+    margin-left: 65%;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}

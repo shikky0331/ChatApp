@@ -1,9 +1,14 @@
 import keyMirror from 'keymirror'
 
 export const ActionTypes = keyMirror({
+  GET_MESSAGES: null,
+  SAVE_MESSAGE: null,
+  GET_USERS: null,
+  SEARCH_USERS: null,
+  GET_CURRENT_USER: null,
+  SAVE_IMAGE: null,
   UPDATE_OPEN_CHAT_ID: null,
-  SEND_MESSAGE: null,
-})//  valueにnullを指定することで、keyと同じ文字列を生成
+})
 
 export function CSRFToken() {
   return document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -12,5 +17,10 @@ export function CSRFToken() {
 const Root = window.location.origin || `${window.location.protocol}//${window.location.hostname}`
 const APIRoot = `${Root}/api`
 export const APIEndpoints = {
-  HOGE: APIRoot + '/hoge',
+  MESSAGES: APIRoot + '/messages',
+  USERS: APIRoot + '/users',
+  CURRENT_USER: APIRoot + '/current_users',
+  FRIENDSHIPS: APIRoot + '/friendships',
 }
+// UPDATE_OPEN_CHAT_ID: null,
+// SEND_MESSAGE: null,

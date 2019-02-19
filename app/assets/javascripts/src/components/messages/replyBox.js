@@ -1,3 +1,4 @@
+// import FileInput from 'react-file-input'
 import React from 'react'
 import MessagesStore from '../../stores/messages'  // 追記
 import MessagesAction from '../../actions/messages' // 追記
@@ -5,26 +6,52 @@ import MessagesAction from '../../actions/messages' // 追記
 class ReplyBox extends React.Component {
   constructor(props) {
     super(props)
-    this.state = this.initialState
-  } //  valueの値は空
-  get initialState() {
-    return {
-      value: ' ',
+    this.state = {
+      value: '',
+      file: '',
+      to_user_id: '',
+      // to_user_id: MessagesStore.getToUserId(),
     }
-  }
+    this.onChangeHandler = this.onStoreChange.bind(this)
+  } //  valueの値は空
+  // get initialState() {
+  //   return {
+  //     value: ' ',
+  //   }
   handleKeyDown(e) {
     if (e.keyCode === 13) {
-      MessagesAction.sendMessage(MessagesStore.getOpenChatUserID(), this.state.value)// sendMessageアクションを呼ぶ
+      MessagesAction.saveMessage(e.target.value, this.state.to_user_id)// saveMessageアクションを呼ぶ content from timestampを保存
+      // MessagesAction.getMessages(e.target.value)
       this.setState({
         value: ' ',
+        // file: ' ',
       })// 文字をリセットする
     }
   }
-    updateValue(e) {
-      this.setState({
-        value: e.target.value,
-      })
-    }
+
+  updateValue(e) {
+    this.setState({
+      value: e.target.value,
+    })
+  }
+
+  onChangeFile(e) {
+    this.setState({
+      // files: e.target.files,
+      file: e.target.files[0],
+    })
+    MessagesAction.saveImage(e.target.files[0])
+  }
+
+  componentDidMount() {
+    MessagesStore.onChange(this.onChangeHandler)
+  }
+
+  onStoreChange() {
+    this.setState({
+      to_user_id: MessagesStore.getToUserId(),
+    })
+  }
 
   render() {
     return (
@@ -35,6 +62,10 @@ class ReplyBox extends React.Component {
           onChange={ this.updateValue.bind(this) }
           className='reply-box__input'
           placeholder='Type message to reply..'
+        />
+        <input
+          type='file'
+          onChange={this.onChangeFile.bind(this)}
         />
         <span className='reply-box__tip'>
           Press <span className='reply-box__tip__button'>Enter</span> to send
