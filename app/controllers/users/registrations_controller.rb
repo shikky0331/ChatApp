@@ -24,25 +24,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
 
     # @user = User.find(params[:id])
+    unless @user.valid_password?(params[:user][:current_password])
+    end
     # if params[:image]
-    if user_params[:image]
-     @user.image = "#{@user.id}.jpg"
-     image = user_params[:image]
-     File.binwrite("public/user_images/#{@user.image}", image.read)
-    end
-    binding.pry
+      if user_params[:image]
+        @user.image = "#{@user.id}.jpg"
+        image = user_params[:image]
+        File.binwrite("public/user_images/#{@user.image}", image.read)
+        @user.update_attributes(user_params)
 
-    if @user.update_attributes(user_params)
-      binding.pry
-      flash[:success] = '変更に成功しました。'
-      redirect_to @user
-    end
+        # binding.pry
+        # @user.image = "#{@user.id}.jpg"
+      end  #
+      # flash[:success] = '変更に成功しました。'
+  end
 
     # if @user.save
     #   flash[:success] = '変更に成功しました。'
     #   redirect_to @user
     # end
-  end
+  # end
 
   # DELETE /resource
   # def destroy
@@ -85,5 +86,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
     end
+
+     def after_update_path_for(resource)
+       edit_users_path
+     end
+
 
 end

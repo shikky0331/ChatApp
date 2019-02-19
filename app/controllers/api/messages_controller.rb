@@ -22,7 +22,7 @@ class Api::MessagesController < ApplicationController
       to_user_id = params[:user_id]
 
       render json: {
-        messages: messages,
+        messages: messages.sort,
         to_user_id: to_user_id
       }
     else
@@ -77,6 +77,7 @@ class Api::MessagesController < ApplicationController
       user_id: current_user.id,
       to_user_id: params[:to_user_id]
     )
+    binding.pry
     # @message = current_user.messages.build(message_params)
     render json: message
   end

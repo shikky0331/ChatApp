@@ -25,7 +25,7 @@ class Search extends React.Component {
     }
 
     componentDidMount() {
-      UsersAction.getUsers()
+      // UsersAction.getUsers()
     }
 
     render() {

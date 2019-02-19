@@ -1,6 +1,10 @@
 <div class='user_profile'>
   <div class='user_profile_image'>
-    <img src="<%= "#{@user.image}" %>">
+  <% if "#{@current_user.image}" === 'default_image'  %>
+    <img src="<%= "/user_images/default_image.jpg" %>">
+  <% else %>
+    <img src="<%= "/user_images/#{@current_user.id}.jpg" %>">
+  <% end %>
   </div>
   <div class='user_profile_name'>
     <%= current_user.name %>

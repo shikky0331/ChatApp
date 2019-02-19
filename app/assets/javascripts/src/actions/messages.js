@@ -68,6 +68,7 @@ export default{
     return new Promise((resolve, reject) => {
       request
       .post(`${APIEndpoints.MESSAGES}/image`)
+      .set('X-CSRF-Token', CSRFToken())
       .attach('image', file)
       .field('caption', 'My cats')
       .end((error, res) => {
