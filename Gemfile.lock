@@ -42,6 +42,7 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
+    bcrypt (3.1.12)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     browserify-rails (4.3.0)
@@ -50,6 +51,7 @@ GEM
       sprockets (>= 3.6.0)
     builder (3.2.3)
     byebug (10.0.2)
+    coderay (1.1.2)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -61,6 +63,14 @@ GEM
     connection_pool (2.2.2)
     crass (1.0.4)
     debug_inspector (0.0.3)
+    devise (4.5.0)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0, < 6.0)
+      responders
+      warden (~> 1.2.3)
+    devise-i18n (1.7.1)
+      devise (>= 4.5)
     erb2haml (0.1.5)
       html2haml
     erubis (2.7.0)
@@ -97,12 +107,25 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
+    method_source (0.9.2)
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
+    orm_adapter (0.5.0)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-byebug (3.6.0)
+      byebug (~> 10.0)
+      pry (~> 0.10)
+    pry-doc (1.0.0)
+      pry (~> 0.11)
+      yard (~> 0.9.11)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
     public_suffix (3.0.3)
     rack (1.6.10)
     rack-test (0.6.3)
@@ -126,6 +149,9 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
+    rails-i18n (4.0.9)
+      i18n (~> 0.7)
+      railties (~> 4.0)
     railties (4.2.8)
       actionpack (= 4.2.8)
       activesupport (= 4.2.8)
@@ -142,6 +168,9 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
+    responders (2.4.1)
+      actionpack (>= 4.2.0, < 6.0)
+      railties (>= 4.2.0, < 6.0)
     ruby_parser (3.11.0)
       sexp_processor (~> 4.9)
     sass (3.6.0)
@@ -181,11 +210,14 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.19)
       execjs (>= 0.3.0, < 3)
+    warden (1.2.7)
+      rack (>= 1.0)
     web-console (2.3.0)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    yard (0.9.18)
 
 PLATFORMS
   ruby
@@ -194,11 +226,17 @@ DEPENDENCIES
   browserify-rails
   byebug
   coffee-rails (~> 4.1.0)
+  devise
+  devise-i18n
   erb2haml
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
+  pry-byebug
+  pry-doc
+  pry-rails
   rails (= 4.2.8)
+  rails-i18n
   react-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
@@ -209,4 +247,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.16.4
+   1.17.2

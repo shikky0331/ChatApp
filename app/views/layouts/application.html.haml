@@ -7,5 +7,27 @@
     = javascript_include_tag 'application'
     = javascript_include_tag '/assets/javascripts/boot.js'
     = csrf_meta_tags
+
   %body
+    #user_name{:data => "current_user.name >"}
+    %p.notice= notice
+    %p.alert= alert
+    %header.header
+      .header-left
+        .header-logo
+          %a{:classname => "header-logo-link", :href => "/"} ChatApp
+      .header-right
+        %ul.nav.nav-tabs
+          %li.search-user-btn
+            %a{:href => "/users/search"} ユーザーを探す
+          %li.dropdown
+            %div{"aria-expanded" => "false", "data-toggle" => "dropdown"}
+              メニュー
+              %span.caret
+            %ul.dropdown-menu.user-menu-box
+              %li.user-menu-list
+                %a{:href => "/users"} マイページ
+              %li.user-menu-list
+                = link_to 'ログアウト', destroy_user_session_path, method: :delete
+
     = yield

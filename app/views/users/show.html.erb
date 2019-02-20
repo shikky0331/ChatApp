@@ -1,0 +1,18 @@
+<div class='user_profile'>
+  <div class='user_profile_image'>
+  <% if "#{@current_user.image}" === 'default_image'  %>
+    <img src="<%= "/user_images/default_image.jpg" %>">
+  <% else %>
+    <img src="<%= "/user_images/#{@current_user.id}.jpg" %>">
+  <% end %>
+  </div>
+  <div class='user_profile_name'>
+    <%= current_user.name %>
+  </div>
+  <div class=user_profile_email>
+    <%= current_user.email %>
+  </div>
+  <div class='user_profile_edit_btn'>
+    <a class='btn btn-info' href='/users/edit'>編集</a>
+  </div>
+</div>
