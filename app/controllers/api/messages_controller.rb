@@ -84,9 +84,14 @@ class Api::MessagesController < ApplicationController
 
   def image
     # if params[:image]
-      File.binwrite("public/message_images/#{params[:image]}",params[:image].read)
-      binding.pry
-      params[:image] = "#{current_user.id}.image.jpg"
+      post_image = "#{current_user.messages.last.id + 1}.jpg"
+
+      # binding.pry
+      image = params[:image]
+
+      File.binwrite("public/message_images/#{post_image}", image.read)
+
+      # params[:image] = "#{current_user.id}.image.jpg"
 
       message = Message.new(
         # image: params[:image]

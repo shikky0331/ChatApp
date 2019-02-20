@@ -115,8 +115,7 @@ class MessagesBox extends React.Component {
       return (
           <li key={ messages.id } className={ messageClasses }>
             <div className='message-box__item__contents'>
-              { messages.content }
-              {messages.image}
+            { (messages.image === null) ? messages.content : <img src = {`/message_images/${messages.id}.jpg`}/> }
             </div>
           </li>
         )
