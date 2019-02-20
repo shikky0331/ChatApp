@@ -39,8 +39,9 @@ class ReplyBox extends React.Component {
     this.setState({
       // files: e.target.files,
       file: e.target.files[0],
+      to_user_id: this.state.to_user_id,
     })
-    MessagesAction.saveImage(e.target.files[0])
+    MessagesAction.saveImage(e.target.files[0], this.state.to_user_id)
   }
 
   componentDidMount() {

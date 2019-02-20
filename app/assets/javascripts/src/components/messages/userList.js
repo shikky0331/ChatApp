@@ -181,19 +181,24 @@ class UserList extends React.Component {
         //    key={ user.user.id }
         //  >
         <li key={user.user.id}>
-          <div className='user-list__item__details'>
-            <h4
+          <div className='user-list-list'>
+            <div className='user-list__item__details'>
+            <div className='user-list__item__icon'>
+              アイコン
+            </div>
+            <div
             className='user-list__item__name'
             onClick={this.changeOpenChat.bind(this, user.user.id, user.user.id) }
             >
               { user.user.name }
-            </h4>
-          </div>
-          <div
-          className='delete_button'
-          onClick={ this.deleteButton.bind(this, user.user.id)}
-          >
-            消去
+            </div>
+            <div
+            className='delete_button'
+            onClick={ this.deleteButton.bind(this, user.user.id)}
+            >
+              ×
+            </div>
+            </div>
           </div>
         </li>
       )

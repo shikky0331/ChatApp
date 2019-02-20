@@ -77,20 +77,28 @@ class Api::MessagesController < ApplicationController
       user_id: current_user.id,
       to_user_id: params[:to_user_id]
     )
-    binding.pry
+    # binding.pry
     # @message = current_user.messages.build(message_params)
     render json: message
   end
 
   def image
-    if params[:image]
-      message = Message.create(
-        image: params[:image]
-      )
+    # if params[:image]
+      File.binwrite("public/message_images/#{params[:image]}",params[:image].read)
       binding.pry
+      params[:image] = "#{current_user.id}.image.jpg"
+
+      message = Message.new(
+        # image: params[:image]
+        image: params[:image],
+        to_user_id: params[:to_user_id],
+        user_id: current_user.id
+      )
+
+      message.save(validate: false)
 
       render json: message
-    end
+    # end
   end
 
     # private

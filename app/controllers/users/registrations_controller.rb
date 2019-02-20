@@ -33,7 +33,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
         File.binwrite("public/user_images/#{@user.image}", image.read)
         @user.update_attributes(user_params)
 
-        # binding.pry
         # @user.image = "#{@user.id}.jpg"
       end  #
       # flash[:success] = '変更に成功しました。'

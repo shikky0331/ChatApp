@@ -1,6 +1,6 @@
 import Dispatcher from '../dispatcher'
 import BaseStore from '../base/store'
-import UsersStore from '../stores/user'
+// import UsersStore from '../stores/user'
 import {ActionTypes} from '../constants/app'
 // import MessagesAction from '../actions/messages'
 // import {APIEndpoints} from '../../constants/app'

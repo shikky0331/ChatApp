@@ -64,18 +64,18 @@ export default{
      })
     })
   },
-  saveImage(file, ) {
+  saveImage(file, to_user_id) {
     return new Promise((resolve, reject) => {
       request
       .post(`${APIEndpoints.MESSAGES}/image`)
       .set('X-CSRF-Token', CSRFToken())
+      .field('to_user_id', to_user_id)
       .attach('image', file)
-      .field('caption', 'My cats')
       .end((error, res) => {
         if (!error && res.status === 200) {
           const json = JSON.parse(res.text)
           Dispatcher.handleServerAction({
-            type: ActionTypes.SAVE_IMAGE,
+            type: ActionTypes.SAVE_MESSAGE,
             messages: json,
           })
         } else {
