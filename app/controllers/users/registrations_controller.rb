@@ -32,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         image = user_params[:image]
         File.binwrite("public/user_images/#{@user.image}", image.read)
         @user.update_attributes(user_params)
-
+        redirect_to users_path
         # @user.image = "#{@user.id}.jpg"
       end  #
       # flash[:success] = '変更に成功しました。'
@@ -87,7 +87,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
      def after_update_path_for(resource)
-       edit_users_path
+       users_path
      end
 
 

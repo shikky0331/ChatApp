@@ -93,7 +93,9 @@
      text-decoration: none;
    }
 
-   .notice {
+   /* .notice {
      position: relative;
      top: 50px;
-   }
+     text-align: center;
+     font-size: 10px;
+   } */

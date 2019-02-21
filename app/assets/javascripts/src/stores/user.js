@@ -35,6 +35,11 @@ UsersStore.dispatchToken = Dispatcher.register(payload => {
       UsersStore.setUsers(action.json)
       UsersStore.emitChange()
       break
+
+    case ActionTypes.SAVE_FRIEND:
+      UsersStore.setUsers(action.json)
+      UsersStore.emitChange()
+      break
   }
   return true
 })

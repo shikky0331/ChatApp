@@ -13,12 +13,15 @@ class Api::FriendshipsController < ApplicationController
   def create
    # user = User.find(params[:friendship][:from_user_id])
    # current_user.follow!(user)
+   # binding.pry
    friendship = Friendship.new(
      from_user_id: current_user.id,
      to_user_id: params[:to_user_id]
    )
 
    friendship.save
+
+   # render json: friendship
    # if (friendship.save) then
    #   redirect_to root_path
    # end
@@ -31,13 +34,13 @@ class Api::FriendshipsController < ApplicationController
    # クリックしたユーザーのidで
    # user = current_user
 
+   binding.pry
    Friendship.find_by(current_user.id, params[:id]).destroy
-   # binding.pry
 
    # friends = current_user.friendships_of_from_user + current_user.friendships_of_to_user
    #
    # friends.where("to_user_id = ? OR from_user_id = ?",'params[:id]', 'params[:id]')
-   #
+
    # friends.find(to_user_id: params[:id], from_user_id: params[:id]).destroy
    #
 # to_userが削除できない？

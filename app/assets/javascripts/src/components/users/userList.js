@@ -51,8 +51,6 @@ export default class UserList extends React.Component {
 
   friendshipButton(users) {
     // FriendshipsAction.saveFriendship(users.id)
-
-    // saveFriendship(from_user_id){
     request
       .post(APIEndpoints.FRIENDSHIPS)// postリクエストがapi/messagesに送
       .set('X-CSRF-Token', CSRFToken())
@@ -92,7 +90,7 @@ export default class UserList extends React.Component {
                      className='search_result'
                      onClick={ this.friendshipButton.bind(this, users) }
                      >
-                      { '/user_images/default_image.jpg' === 'default_image.jpg' ? <img className='icon' src = 'user_images/default_image.jpg' />  : <img className='icon' src = {`/user_images/${users.id}.jpg`}/> }
+                      { `${users.image}` === "default_image" ? <img className='icon' src = { '/user_images/default_image.jpg' } />  : <img className='icon' src = {`/user_images/${users.id}.jpg`}/> }
                       {users.name}
                     </div>
                   </form>

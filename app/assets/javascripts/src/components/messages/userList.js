@@ -179,7 +179,7 @@ class UserList extends React.Component {
         <li className = { itemClasses } key={user.user.id}>
           <div className = 'user-list-list'>
             <div className = 'user-list__item__icon'>
-              { '/user_images/default_image.jpg' === 'default_image.jpg' ? <img className='icon' src = 'user_images/default_image.jpg' />  : <img className='icon' src = {`/user_images/${user.user.id}.jpg`}/> }
+              { `${user.user.image}` === "default_image" ? <img className='icon' src = { '/user_images/default_image.jpg' } />  : <img className='icon' src = {`/user_images/${user.user.id}.jpg`}/> }
             </div>
             <div
             className='user-list__item__name'

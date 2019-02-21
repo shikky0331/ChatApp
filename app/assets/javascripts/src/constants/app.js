@@ -7,6 +7,7 @@ export const ActionTypes = keyMirror({
   SEARCH_USERS: null,
   GET_CURRENT_USER: null,
   SAVE_IMAGE: null,
+  SAVE_FRIEND: null,
   UPDATE_OPEN_CHAT_ID: null,
 })
 
