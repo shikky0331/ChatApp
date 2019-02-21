@@ -22,7 +22,7 @@
             %a{:href => "/users/search"} ユーザーを探す
           %li.dropdown
             %div{"aria-expanded" => "false", "data-toggle" => "dropdown"}
-              メニュー
+              =current_user.name
               %span.caret
             %ul.dropdown-menu.user-menu-box
               %li.user-menu-list

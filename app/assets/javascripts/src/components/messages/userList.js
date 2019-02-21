@@ -182,9 +182,8 @@ class UserList extends React.Component {
         //  >
         <li key={user.user.id}>
           <div className='user-list-list'>
-            <div className='user-list__item__details'>
             <div className='user-list__item__icon'>
-              アイコン
+              { `${user.user.image}.jpg === 'default_image'` ? <img className='icon' src = 'user_images/default_image.jpg' />  : <img src = {`/user_images/${user.user.id}.jpg`}/> }
             </div>
             <div
             className='user-list__item__name'
@@ -197,7 +196,6 @@ class UserList extends React.Component {
             onClick={ this.deleteButton.bind(this, user.user.id)}
             >
               ×
-            </div>
             </div>
           </div>
         </li>
