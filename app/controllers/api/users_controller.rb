@@ -18,10 +18,15 @@ class Api::UsersController < ApplicationController
   def search
     # user = User.all
     # user = User.where("name LIKE ?", "params[:name]%")
-    not_current_user = User.where.not(id: current_user.id)
-    user = not_current_user.where("name LIKE ?", "#{params[:name]}%")
-    # user = User.where("name LIKE ?", "sh%")
-    render json: user
+    # binding.pry
+    unless params[:name] === ''
+      not_current_user = User.where.not(id: current_user.id)
+      user = not_current_user.where("name LIKE ?", "#{params[:name]}%")
+      # user = User.where("name LIKE ?", "sh%")
+      render json: user
+    else
+      render json: user
+    end
   end
 
     private
