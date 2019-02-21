@@ -1,5 +1,7 @@
 require "User.rb"
 require 'byebug'
+require 'rubygems'
+require 'RMagick'
 class Api::MessagesController < ApplicationController
   protect_from_forgery :except => [:image]
 
@@ -86,19 +88,22 @@ class Api::MessagesController < ApplicationController
     # if params[:image]
       post_image = "#{current_user.messages.last.id + 1}.jpg"
 
-      # binding.pry
       image = params[:image]
 
       File.binwrite("public/message_images/#{post_image}", image.read)
 
+      rmagick = Magick::Image.read("public/message_images/#{post_image}").first
+      rmagick = rmagick.resize(500,500)
+      rmagick.write("#{post_image}")
       # params[:image] = "#{current_user.id}.image.jpg"
 
       message = Message.new(
         # image: params[:image]
-        image: params[:image],
+        image: rmagick,
         to_user_id: params[:to_user_id],
         user_id: current_user.id
       )
+      # binding.pry
 
       message.save(validate: false)
 
