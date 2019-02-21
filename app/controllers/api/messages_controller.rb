@@ -94,7 +94,7 @@ class Api::MessagesController < ApplicationController
 
       rmagick = Magick::Image.read("public/message_images/#{post_image}").first
       rmagick = rmagick.resize(500,500)
-      rmagick.write("#{post_image}")
+      rmagick.write("public/resize_image/#{post_image}")
       # params[:image] = "#{current_user.id}.image.jpg"
 
       message = Message.new(

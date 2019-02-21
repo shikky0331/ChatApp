@@ -92,6 +92,7 @@ export default class UserList extends React.Component {
                      className='search_result'
                      onClick={ this.friendshipButton.bind(this, users) }
                      >
+                      { '/user_images/default_image.jpg' === 'default_image.jpg' ? <img className='icon' src = 'user_images/default_image.jpg' />  : <img className='icon' src = {`/user_images/${users.id}.jpg`}/> }
                       {users.name}
                     </div>
                   </form>

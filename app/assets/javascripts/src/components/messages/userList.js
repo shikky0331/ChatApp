@@ -1,7 +1,7 @@
 // userList.js
 import React from 'react'
 import _ from 'lodash'
-// import classNames from 'classnames'
+import classNames from 'classnames'
 // import Utils from '../../utils'
 import MessagesStore from '../../stores/messages'
 import UsersStore from '../../stores/user'
@@ -80,7 +80,7 @@ class UserList extends React.Component {
 
       return {
       // openChatID: messagesStore.getOpenChatUserID(),
-        openChatID: MessagesStore.getOpenChatID,
+        openChatID: MessagesStore.getToUserId(),// クリックしたIDを入れる
       // messageList: messageList,
         userList: userList,
       }
@@ -159,14 +159,10 @@ class UserList extends React.Component {
       //   isNewMessage = message.lastMessage.from !== UsersStore.user.id
       // }
 
-      // const itemClasses = classNames({
-      //   'user-list__item': true,
-      //   'clear': true,
-      //   // 'user-list__item--new': isNewMessage,
-      //   'user-list__item--active': this.state.openChatID === message.user_id,
-      // })
-
-      // return (
+      const itemClasses = classNames({
+        'active-list': user.user.id === Number(this.state.openChatID)
+        // 'user-list__item--active': ,
+      })
       //   <li onClick={this.changeOpenChat.bind(this, message.user_id) }
       //     className={ itemClasses }
       //     key={ message.user_id }
@@ -180,14 +176,15 @@ class UserList extends React.Component {
         //    className={ itemClasses }
         //    key={ user.user.id }
         //  >
-        <li key={user.user.id}>
-          <div className='user-list-list'>
-            <div className='user-list__item__icon'>
-              { `${user.user.image}.jpg === 'default_image'` ? <img className='icon' src = 'user_images/default_image.jpg' />  : <img src = {`/user_images/${user.user.id}.jpg`}/> }
+        <li className = { itemClasses } key={user.user.id}>
+          <div className = 'user-list-list'>
+            <div className = 'user-list__item__icon'>
+              { '/user_images/default_image.jpg' === 'default_image.jpg' ? <img className='icon' src = 'user_images/default_image.jpg' />  : <img className='icon' src = {`/user_images/${user.user.id}.jpg`}/> }
             </div>
             <div
             className='user-list__item__name'
             onClick={this.changeOpenChat.bind(this, user.user.id, user.user.id) }
+
             >
               { user.user.name }
             </div>

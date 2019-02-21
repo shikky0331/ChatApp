@@ -148,9 +148,6 @@ class MessageStore extends BaseStore {
     // getChatByUserID(id) {
     //   return messages[id]
     //  }
-    getOpenChatID() {
-
-    }
 }
 const MessagesStore = new MessageStore()
 // const messages = MessagesStore.getMessages()
