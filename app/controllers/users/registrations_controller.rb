@@ -23,26 +23,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     super
 
-    # @user = User.find(params[:id])
+    # current_passwordの確認
     unless @user.valid_password?(params[:user][:current_password])
     end
-    # if params[:image]
-      if user_params[:image]
-        @user.image = "#{@user.id}.jpg"
-        image = user_params[:image]
-        File.binwrite("public/user_images/#{@user.image}", image.read)
-        @user.update_attributes(user_params)
-        redirect_to users_path
-        # @user.image = "#{@user.id}.jpg"
-      end  #
-      # flash[:success] = '変更に成功しました。'
-  end
 
-    # if @user.save
-    #   flash[:success] = '変更に成功しました。'
-    #   redirect_to @user
-    # end
-  # end
+    if user_params[:image]
+      @user.image = "#{@user.id}.jpg"
+
+      image = user_params[:image]
+
+      File.binwrite("public/user_images/#{@user.image}", image.read)
+
+      @user.update_attributes(user_params)
+      redirect_to users_path
+    end
+    
+  end
 
   # DELETE /resource
   # def destroy

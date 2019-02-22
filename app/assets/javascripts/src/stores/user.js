@@ -2,7 +2,7 @@ import Dispatcher from '../dispatcher'
 import BaseStore from '../base/store'
 import {ActionTypes} from '../constants/app'
 
-Store extends BaseStore {
+class UserStore extends BaseStore {
   getUsers() {
     if (!this.get('userInfo')) this.setUsers([])
     return this.get('userInfo')

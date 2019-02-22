@@ -10,11 +10,6 @@ class Api::UsersController < ApplicationController
       }
   end
 
-  # def create
-  #   @user = User.create(user_params)
-  #   render json: @user
-  # end
-
   def search
     unless params[:name] === ''
       not_current_user = User.where.not(id: current_user.id)
@@ -24,11 +19,5 @@ class Api::UsersController < ApplicationController
       render json: user
     end
   end
-
-    # private
-    #
-    # def user_params
-    #   params.require(:user).permit(:email, :name)
-    # end
 
 end
