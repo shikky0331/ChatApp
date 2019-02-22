@@ -1,7 +1,6 @@
-require "User.rb"
 class Api::FriendshipsController < ApplicationController
+  require "User.rb"
   protect_from_forgery :except => [:destroy]
-
 
   def index
     friendship = Friendship.all
@@ -11,30 +10,15 @@ class Api::FriendshipsController < ApplicationController
   end
 
   def create
-   # user = User.find(params[:friendship][:from_user_id])
-   # current_user.follow!(user)
-   # binding.pry
    friendship = Friendship.new(
      from_user_id: current_user.id,
      to_user_id: params[:to_user_id]
    )
 
    friendship.save
-
-   # render json: friendship
-   # if (friendship.save) then
-   #   redirect_to root_path
-   # end
-
   end
 
   def destroy
-   # id = current_user.friendships_of_from_user.find_by(params[:to_user_id][:id])
-   # user = Friendship.find(id).to_user_id
-   # クリックしたユーザーのidで
-   # user = current_user
-
-   binding.pry
    Friendship.find_by(current_user.id, params[:id]).destroy
 
    # friends = current_user.friendships_of_from_user + current_user.friendships_of_to_user

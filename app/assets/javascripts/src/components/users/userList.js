@@ -1,16 +1,15 @@
 import React from 'react'
 import _ from 'lodash'
 import UsersStore from '../../stores/user'
-// import Utils from '../../utils'
 import {APIEndpoints, CSRFToken} from '../../constants/app'
 import request from 'superagent'
 
 export default class UserList extends React.Component {
-  static get propTypes() {
-    return {
-      name: React.PropTypes.string,
-    }
-  }
+  // static get propTypes() {
+  //   return {
+  //     name: React.PropTypes.string,
+  //   }
+  // }
 
   constructor(props) {
     super(props)
@@ -24,7 +23,6 @@ export default class UserList extends React.Component {
   getStateFromStore() {
     return {
       users: UsersStore.getUsers(),
-
     }
   }
 
@@ -40,45 +38,28 @@ export default class UserList extends React.Component {
     this.setState(this.getStateFromStore())
   }
 
-  // friendship() {
-  //   request
-  //   .post(APIEndpoints.FRIENDSHIPS)// postリクエストがapi/messagesに送
-  //   .set('X-CSRF-Token', CSRFToken())
-  //   .send({
-  //
-  //   })
-  // }
-
   friendshipButton(users) {
-    // FriendshipsAction.saveFriendship(users.id)
     request
-      .post(APIEndpoints.FRIENDSHIPS)// postリクエストがapi/messagesに送
-      .set('X-CSRF-Token', CSRFToken())
-      .send({
-        to_user_id: users.id,
-      })
-      .end((err, res) => {
-        if (res) {
-          console.log(res.body)
-        } else {
-          console.log(err.body)
-        }
-      })
-    window.location.href = '/'
-  }
+    .post(APIEndpoints.FRIENDSHIPS)
+    .set('X-CSRF-Token', CSRFToken())
+    .send({
+      to_user_id: users.id,
+    })
+    .end((err, res) => {
+      if (res) {
+        console.log(res.body)
+      } else {
+        console.log(err.body)
+      }
+    })
+  window.location.href = '/'
+}
 
   render() {
     const {users} = this.state
     const {name} = this.props
 
     let allUsers = users
-    const searchUser = name.trim().toLowerCase()
-
-    if (searchUser.lenght > 0) {
-      allUsers = _.filter(allUsers, (users) => {
-        return users.users.name.toLowerCase().match(searchUser)
-      })
-    }
     return (
       <ul className='search_list'>
         {
@@ -102,5 +83,11 @@ export default class UserList extends React.Component {
     )
   }
 }
-// <form action='/' method='get'>
-// <input type='submit' value={users.name} />
+
+// const searchUser = name.trim().toLowerCase()
+//
+// // if (searchUser.lenght > 0) {
+// //   allUsers = _.filter(allUsers, (users) => {
+// //     return users.users.name.toLowerCase().match(searchUser)
+// //   })
+// // }
