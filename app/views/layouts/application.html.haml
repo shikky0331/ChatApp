@@ -9,26 +9,27 @@
     = csrf_meta_tags
 
   %body
+    %p.alert.alert-notice= notice
+    %p.alert.alert-error= alert
     #user_name{:data => "current_user.name >"}
-    %p.notice= notice
-    %p.alert= alert
-    %header.header
-      .header-left
-        .header-logo
-          %a{:classname => "header-logo-link", :href => "/"} ChatApp
-      .header-right
-        %ul.nav.nav-tabs
-          %li.search-user-btn
-            %a{:href => "/users/search"} ユーザーを探す
-          %li.dropdown
-            %div{"aria-expanded" => "false", "data-toggle" => "dropdown"}
-              - if user_signed_in?
-                =current_user.name
-              %span.caret
-            %ul.dropdown-menu.user-menu-box
-              %li.user-menu-list
-                %a{:href => "/users"} マイページ
-              %li.user-menu-list
-                = link_to 'ログアウト', destroy_user_session_path, method: :delete
+    - if user_signed_in?
+      %header.header
+        .header-left
+          .header-logo
+            %a{:classname => "header-logo-link", :href => "/"} ChatApp
+        .header-right
+          %ul.nav.nav-tabs
+            %li.search-user-btn
+              %a{:href => "/users/search"} ユーザーを探す
+            %li.dropdown
+              %div{"aria-expanded" => "false", "data-toggle" => "dropdown"}
+                - if user_signed_in?
+                  =current_user.name
+                %span.caret
+              %ul.dropdown-menu.user-menu-box
+                %li.user-menu-list
+                  %a{:href => "/users"} マイページ
+                %li.user-menu-list
+                  = link_to 'ログアウト', destroy_user_session_path, method: :delete
 
     = yield
