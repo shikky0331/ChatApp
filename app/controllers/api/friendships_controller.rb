@@ -19,20 +19,19 @@ class Api::FriendshipsController < ApplicationController
   end
 
   def destroy
-   Friendship.find_by(current_user.id, params[:id]).destroy
+    # current_userが友達申請したユーザの中から　削除したい関係を検索
+    from_user_friendship = current_user.friendships_of_from_user.find_by(to_user_id: params[:id])
 
-   # friends = current_user.friendships_of_from_user + current_user.friendships_of_to_user
-   #
-   # friends.where("to_user_id = ? OR from_user_id = ?",'params[:id]', 'params[:id]')
+   # current_userが友達申請されたユーザの中から　削除したい関係を検索
+    to_user_friendship =  current_user.friendships_of_to_user.find_by(from_user_id: params[:id])
 
-   # friends.find(to_user_id: params[:id], from_user_id: params[:id]).destroy
-   #
-# to_userが削除できない？
-   # user.unfollow!(params[:id])
-   # def unfollow!(id)
-   #   friendships_of_from_user.find_by(to_user_id: id).destroy
-   #   # フォローを外す
-   # end
-   # redirect_to root_path
+    # どちらかはnilに必ずなる
+
+      if from_user_friendship.nil?
+        to_user_friendship.destroy
+      else
+        from_user_friendship.destroy
+      end
   end
+
 end

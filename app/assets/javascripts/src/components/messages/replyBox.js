@@ -10,22 +10,16 @@ class ReplyBox extends React.Component {
       value: '',
       file: '',
       to_user_id: '',
-      // to_user_id: MessagesStore.getToUserId(),
     }
     this.onChangeHandler = this.onStoreChange.bind(this)
-  } //  valueの値は空
-  // get initialState() {
-  //   return {
-  //     value: ' ',
-  //   }
+  }
+
   handleKeyDown(e) {
     if (e.keyCode === 13) {
-      MessagesAction.saveMessage(e.target.value, this.state.to_user_id)// saveMessageアクションを呼ぶ content from timestampを保存
-      // MessagesAction.getMessages(e.target.value)
+      MessagesAction.saveMessage(e.target.value, this.state.to_user_id)
       this.setState({
         value: ' ',
-        // file: ' ',
-      })// 文字をリセットする
+      })
     }
   }
 
@@ -37,7 +31,6 @@ class ReplyBox extends React.Component {
 
   onChangeFile(e) {
     this.setState({
-      // files: e.target.files,
       file: e.target.files[0],
       to_user_id: this.state.to_user_id,
     })

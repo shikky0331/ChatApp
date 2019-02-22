@@ -1,15 +1,8 @@
 import Dispatcher from '../dispatcher'
 import BaseStore from '../base/store'
-// import UserStore from '../stores/user'
 import {ActionTypes} from '../constants/app'
-// const UserStore = {
-//   user: {
-//     id: 1,
-//     name: 'John Doek',
-//     profilePicture: 'https://avatars1.githubusercontent.com/u/8901351?v=3&s=200',
-//   },
-// }
-class UserStore extends BaseStore {
+
+Store extends BaseStore {
   getUsers() {
     if (!this.get('userInfo')) this.setUsers([])
     return this.get('userInfo')
@@ -20,7 +13,6 @@ class UserStore extends BaseStore {
 }
 const UsersStore = new UserStore()
 
-// const users = UsersStore.getUsers()
 
 UsersStore.dispatchToken = Dispatcher.register(payload => {
   const action = payload.action
@@ -43,6 +35,5 @@ UsersStore.dispatchToken = Dispatcher.register(payload => {
   }
   return true
 })
-//
+
 export default UsersStore
-// export default UserStore

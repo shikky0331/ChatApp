@@ -5,12 +5,6 @@ import {APIEndpoints, CSRFToken} from '../../constants/app'
 import request from 'superagent'
 
 export default class UserList extends React.Component {
-  // static get propTypes() {
-  //   return {
-  //     name: React.PropTypes.string,
-  //   }
-  // }
-
   constructor(props) {
     super(props)
     this.state = this.initialState
@@ -83,11 +77,3 @@ export default class UserList extends React.Component {
     )
   }
 }
-
-// const searchUser = name.trim().toLowerCase()
-//
-// // if (searchUser.lenght > 0) {
-// //   allUsers = _.filter(allUsers, (users) => {
-// //     return users.users.name.toLowerCase().match(searchUser)
-// //   })
-// // }

@@ -5,7 +5,6 @@ export const ActionTypes = keyMirror({
   SAVE_MESSAGE: null,
   GET_USERS: null,
   SEARCH_USERS: null,
-  GET_CURRENT_USER: null,
   SAVE_IMAGE: null,
   SAVE_FRIEND: null,
   UPDATE_OPEN_CHAT_ID: null,
@@ -23,5 +22,3 @@ export const APIEndpoints = {
   CURRENT_USER: APIRoot + '/current_users',
   FRIENDSHIPS: APIRoot + '/friendships',
 }
-// UPDATE_OPEN_CHAT_ID: null,
-// SEND_MESSAGE: null,

@@ -28,14 +28,14 @@ class UserList extends React.Component {
     })
 
     return {
-      openChatID: MessagesStore.getToUserId(),
       // クリックしたユーザのIDを入れる
+      openChatID: MessagesStore.getToUserId(),
       userList: userList,
     }
   }
 
-    componentWillMount() {
-    MessagesStore.onChange(this.onStoreChange.bind(this))
+  componentWillMount() {
+  MessagesStore.onChange(this.onStoreChange.bind(this))
   }
 
   componentWillUnmount() {
@@ -64,11 +64,6 @@ class UserList extends React.Component {
   }
 
   render() {
-    //   if (!this.state.userList) {
-    //   return (
-    //     <div></div>
-    //   )
-    // }
     const users = this.state.userList.map((user) => {
     const itemClasses = classNames({
       'active-list': user.user.id === Number(this.state.openChatID)
