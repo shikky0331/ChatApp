@@ -45,7 +45,7 @@ class Api::MessagesController < ApplicationController
   end
 
   def image
-      post_image = "#{current_user.messages.last.id + 1}.jpg"
+      post_image = "#{Message.last.id + 1}.jpg"
 
       image = params[:image]
 

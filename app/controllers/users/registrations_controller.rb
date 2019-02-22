@@ -23,7 +23,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     super
 
-    # current_passwordの確認
+    # current_passwordã�®ç¢ºèª�
     unless @user.valid_password?(params[:user][:current_password])
     end
 
@@ -35,9 +35,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       File.binwrite("public/user_images/#{@user.image}", image.read)
 
       @user.update_attributes(user_params)
-      redirect_to users_path
     end
-    
+
   end
 
   # DELETE /resource
@@ -78,9 +77,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-    def user_params
+     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
-    end
+     end
 
      def after_update_path_for(resource)
        users_path
