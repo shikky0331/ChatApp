@@ -51,17 +51,19 @@ class UserList extends React.Component {
   }
 
   deleteButton(id) { // 友達関係を削除
-    request
-    .del(`${APIEndpoints.FRIENDSHIPS}/${id}`)
-    .end((err, res) => {
-      if (res) {
-        console.log(res.body)
-      } else {
-        console.log(err.body)
-      }
-    })
-    window.location.href = '/'
-  }
+    if(window.confirm('本当に削除しますか？(チャットの履歴は残ります。)')) {
+      request
+      .del(`${APIEndpoints.FRIENDSHIPS}/${id}`)
+      .end((err, res) => {
+        if (res) {
+          console.log(res.body)
+        } else {
+          console.log(err.body)
+        }
+      })
+      window.location.href = '/'
+	}
+}
 
   render() {
     const users = this.state.userList.map((user) => {
