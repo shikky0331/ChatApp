@@ -11,6 +11,7 @@ class UserList extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.initialState
+    MessagesStore.onChange(this.onStoreChange.bind(this))
   }
 
   get initialState() {
@@ -22,9 +23,7 @@ class UserList extends React.Component {
     const userList = []
 
     _.each(allUsers, (user) => {
-      userList.push({
-        user: user,
-      })
+      userList.push({ user })
     })
 
     return {
@@ -32,14 +31,6 @@ class UserList extends React.Component {
       openChatID: MessagesStore.getToUserId(),
       userList: userList,
     }
-  }
-
-  componentWillMount() {
-  MessagesStore.onChange(this.onStoreChange.bind(this))
-  }
-
-  componentWillUnmount() {
-    MessagesStore.offChange(this.onStoreChange.bind(this))
   }
 
   onStoreChange() {
@@ -51,7 +42,7 @@ class UserList extends React.Component {
   }
 
   deleteButton(id) { // 友達関係を削除
-    if(window.confirm('本当に削除しますか？(チャットの履歴は残ります。)')) {
+    if (window.confirm('本当に削除しますか？(チャットの履歴は残ります。)')) {
       request
       .del(`${APIEndpoints.FRIENDSHIPS}/${id}`)
       .end((err, res) => {
@@ -61,20 +52,20 @@ class UserList extends React.Component {
           console.log(err.body)
         }
       })
-      window.location.href = '/'
-	}
-}
+    }
+    window.location.href = '/'
+  }
 
   render() {
     const users = this.state.userList.map((user) => {
-    const itemClasses = classNames({
-      'active-list': user.user.id === Number(this.state.openChatID)
-    })
+      const itemClasses = classNames({
+        'active-list': user.user.id === Number(this.state.openChatID),
+      })
       return (
         <li className = { itemClasses } key={user.user.id}>
           <div className = 'user-list-list'>
             <div className = 'user-list__item__icon'>
-              { `${user.user.image}` === "default_image" ? <img className='icon' src = { '/user_images/default_image.jpg' } />  : <img className='icon' src = {`/user_images/${user.user.id}.jpg`}/> }
+              { `${user.user.image}` === 'default_image' ? <img className='icon' src = { '/user_images/default_image.jpg' } /> : <img className='icon' src = {`/user_images/${user.user.id}.jpg`}/> }
             </div>
 
             <div
@@ -106,3 +97,9 @@ class UserList extends React.Component {
 }
 
 export default UserList
+// componentWillMount() {
+// }
+
+// componentWillUnmount() {
+//   MessagesStore.offChange(this.onStoreChange.bind(this))
+// }

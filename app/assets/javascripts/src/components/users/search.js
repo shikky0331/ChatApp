@@ -20,10 +20,6 @@ class Search extends React.Component {
       UsersAction.getSearchUsers(name)
     }
 
-    componentDidMount() {
-      // UsersAction.getUsers()
-    }
-
     render() {
       const {name} = this.state
       return (

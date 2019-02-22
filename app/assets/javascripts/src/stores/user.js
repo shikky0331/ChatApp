@@ -7,12 +7,13 @@ class UserStore extends BaseStore {
     if (!this.get('userInfo')) this.setUsers([])
     return this.get('userInfo')
   }
+
   setUsers(array) {
     this.set('userInfo', array)
   }
 }
-const UsersStore = new UserStore()
 
+const UsersStore = new UserStore()
 
 UsersStore.dispatchToken = Dispatcher.register(payload => {
   const action = payload.action

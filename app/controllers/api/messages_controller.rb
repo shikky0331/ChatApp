@@ -1,8 +1,7 @@
-require "User.rb"
-require 'byebug'
-require 'rubygems'
-require 'RMagick'
 class Api::MessagesController < ApplicationController
+  require "User.rb"
+  require 'rubygems'
+  require 'RMagick'
   protect_from_forgery :except => [:image]
 
   def index
@@ -39,31 +38,32 @@ class Api::MessagesController < ApplicationController
       message = Message.create(
       content: params[:content],
       user_id: current_user.id,
-      to_user_id: params[:to_user_id]
+      to_user_id: params[:to_user_id],
+      timestamp: Time.now.to_i
     )
     render json: message
   end
 
   def image
-      post_image = "#{Message.last.id + 1}.jpg"
+    post_image = "#{Message.last.id + 1}.jpg"
 
-      image = params[:image]
+    image = params[:image]
 
-      File.binwrite("public/message_images/#{post_image}", image.read)
+    File.binwrite("public/message_images/#{post_image}", image.read)
 
-      # リサイズ
-      rmagick = Magick::Image.read("public/message_images/#{post_image}").first
-      rmagick = rmagick.resize(500,500)
-      rmagick.write("public/resize_image/#{post_image}")
+    # リサイズ
+    rmagick = Magick::Image.read("public/message_images/#{post_image}").first
+    rmagick = rmagick.resize(500,500)
+    rmagick.write("public/resize_image/#{post_image}")
 
-      message = Message.new(
-        image: rmagick,
-        to_user_id: params[:to_user_id],
-        user_id: current_user.id
-      )
+    message = Message.new(
+      image: rmagick,
+      to_user_id: params[:to_user_id],
+      user_id: current_user.id
+    )
 
-      message.save(validate: false)
+    message.save(validate: false)
 
-      render json: message
+    render json: message
   end
 end

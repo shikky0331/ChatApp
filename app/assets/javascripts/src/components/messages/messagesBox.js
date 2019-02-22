@@ -30,23 +30,7 @@ class MessagesBox extends React.Component {
 
     return {
       messageList: messageList,
-      current_user: [],
     }
-  }
-
-  getMessages() {
-    request
-    .get(APIEndpoints.MESSAGES)
-    .end((error, res) => {
-      if (!error && res.status === 200) {
-        const json = JSON.parse(res.text)
-        this.setState({
-          messages: json.messages,
-        })
-      } else {
-        console.log(error)
-      }
-    })
   }
 
   getUsers() {
@@ -65,14 +49,12 @@ class MessagesBox extends React.Component {
   }
 
   componentDidMount() {
+    // this.getUsers()がないとユーザーをclickした際に、currentUserIDがnodefinedになってしまう。
     this.getUsers()
     UsersAction.getUsers()
     MessagesAction.getMessages()
     MessagesStore.onChange(this.onChangeHandler)
   }
-  // componentWillUnmount() {
-  //   MessagesStore.offChange(this.onChangeHandler)
-  // }
   onStoreChange() {
     this.setState({
       messageList: MessagesStore.getMessages(),
@@ -80,12 +62,6 @@ class MessagesBox extends React.Component {
   }
 
   render() {
-    // if (!this.state.messages || !this.state.users) {
-    //   return (
-    //     <div>表示します</div>
-    //   )
-    // }
-
     const currentUserID = this.state.users
 
     const messages = this.state.messageList.map((messages, index) => {
@@ -102,7 +78,7 @@ class MessagesBox extends React.Component {
             </div>
           </li>
         )
-      })
+    })
 
     return (
         <div className='message-box'>
@@ -115,3 +91,20 @@ class MessagesBox extends React.Component {
   }
 }
 export default MessagesBox
+// getMessages() {
+//   request
+//   .get(APIEndpoints.MESSAGES)
+//   .end((error, res) => {
+//     if (!error && res.status === 200) {
+//       const json = JSON.parse(res.text)
+//       this.setState({
+//         messages: json.messages,
+//       })
+//     } else {
+//       console.log(error)
+//     }
+//   })
+// }
+// componentWillUnmount() {
+//   MessagesStore.offChange(this.onChangeHandler)
+// }

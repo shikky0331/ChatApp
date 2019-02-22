@@ -7,6 +7,7 @@ class MessageStore extends BaseStore {
       if (!this.get('userMessages')) this.setMessages([])
       return this.get('userMessages')
     }
+
     setMessages(array) {
       this.set('userMessages', array)
     }

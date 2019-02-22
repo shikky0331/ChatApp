@@ -1,7 +1,6 @@
-// import FileInput from 'react-file-input'
 import React from 'react'
-import MessagesStore from '../../stores/messages'  // 追記
-import MessagesAction from '../../actions/messages' // 追記
+import MessagesStore from '../../stores/messages'
+import MessagesAction from '../../actions/messages'
 
 class ReplyBox extends React.Component {
   constructor(props) {
@@ -37,10 +36,6 @@ class ReplyBox extends React.Component {
     MessagesAction.saveImage(e.target.files[0], this.state.to_user_id)
   }
 
-  componentDidMount() {
-    MessagesStore.onChange(this.onChangeHandler)
-  }
-
   onStoreChange() {
     this.setState({
       to_user_id: MessagesStore.getToUserId(),
@@ -57,16 +52,20 @@ class ReplyBox extends React.Component {
           className='reply-box__input'
           placeholder='Type message to reply..'
         />
+        <span className='reply-box__tip'>
+        Press
+        <span className='reply-box__tip__button'>Enter</span> to send
+        </span>
         <input
           type='file'
           onChange={this.onChangeFile.bind(this)}
         />
-        <span className='reply-box__tip'>
-          Press <span className='reply-box__tip__button'>Enter</span> to send
-        </span>
       </div>
     )
   }
 }
 
 export default ReplyBox
+// componentDidMount() {
+//   MessagesStore.onChange(this.onChangeHandler)
+// }

@@ -5,6 +5,12 @@ import {APIEndpoints, CSRFToken} from '../../constants/app'
 import request from 'superagent'
 
 export default class UserList extends React.Component {
+  static get propTypes() {
+    return {
+      name: React.PropTypes.string,
+    }
+  }
+
   constructor(props) {
     super(props)
     this.state = this.initialState
@@ -46,12 +52,11 @@ export default class UserList extends React.Component {
         console.log(err.body)
       }
     })
-  window.location.href = '/'
-}
+    window.location.href = '/'
+  }
 
   render() {
     const {users} = this.state
-    const {name} = this.props
 
     let allUsers = users
     return (
@@ -65,7 +70,7 @@ export default class UserList extends React.Component {
                      className='search_result'
                      onClick={ this.friendshipButton.bind(this, users) }
                      >
-                      { `${users.image}` === "default_image" ? <img className='icon' src = { '/user_images/default_image.jpg' } />  : <img className='icon' src = {`/user_images/${users.id}.jpg`}/> }
+                      { `${users.image}` === 'default_image' ? <img className='icon' src = { '/user_images/default_image.jpg' } /> : <img className='icon' src = {`/user_images/${users.id}.jpg`}/> }
                       {users.name}
                     </div>
                   </form>

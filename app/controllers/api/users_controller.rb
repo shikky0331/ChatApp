@@ -12,8 +12,10 @@ class Api::UsersController < ApplicationController
 
   def search
     unless params[:name] === ''
-      not_current_user = User.where.not(id: current_user.id)
-      user = not_current_user.where("name LIKE ?", "#{params[:name]}%")
+    # current_userと友達済みは表示させない
+      not_search_user = User.where.not(id: current_user.id).where.not(id: current_user.friends)
+
+      user = not_search_user.where("name LIKE ?", "#{params[:name]}%")
       render json: user
     else
       render json: user
