@@ -97,7 +97,13 @@ a {
 .flash {
   text-align: right;
 }
-
+// .flash {
+//   background-color: #293742;
+//   color: white;
+//   opacity: 0.5;
+//   padding: 5px;
+//   text-align: center;
+// }
 .alert {
   text-align: center;
   margin-top: 10px;
@@ -113,6 +119,7 @@ a {
   background-color: #bde9ff;
   border-color: #bde9ff;
   color: #4c6977;
+  margin-top: 60px;
 }
 
 .alert-danger {
