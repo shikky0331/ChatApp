@@ -2,12 +2,12 @@ class Api::FriendshipsController < ApplicationController
   require "User.rb"
   protect_from_forgery :except => [:destroy]
 
-  def index
-    friendship = Friendship.all
-    render json: {
-      friendships: friendship
-    }
-  end
+  # def index
+  #   friendship = Friendship.all
+  #   render json: {
+  #     friendships: friendship
+  #   }
+  # end
 
   def create
    friendship = Friendship.new(
@@ -27,7 +27,6 @@ class Api::FriendshipsController < ApplicationController
     to_user_friendship =  current_user.friendships_of_to_user.find_by(from_user_id: params[:id])
 
     # どちらかはnilに必ずなる
-
       if from_user_friendship.nil?
         to_user_friendship.destroy
       else

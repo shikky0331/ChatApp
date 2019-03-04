@@ -1,44 +1,28 @@
 import React from 'react'
-import _ from 'lodash'
 import classNames from 'classnames'
-import MessagesStore from '../../stores/messages'
-import UsersStore from '../../stores/user'
 import MessagesAction from '../../actions/messages'
 import {APIEndpoints} from '../../constants/app'
 import request from 'superagent'
 
 class UserList extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = this.initialState
-    MessagesStore.onChange(this.onStoreChange.bind(this))
-  }
-
-  get initialState() {
-    return this.getStateFromStore()
-  }
-
-  getStateFromStore() {
-    const allUsers = UsersStore.getUsers()
-    const userList = []
-
-    _.each(allUsers, (user) => {
-      userList.push({ user })
-    })
-
+  static get propTypes() {
     return {
-      // クリックしたユーザのIDを入れる
-      openChatID: MessagesStore.getToUserId(),
-      userList: userList,
+      userList: React.PropTypes.array,
+      messageList: React.PropTypes.array,
+      openChatID: React.PropTypes.function,
     }
   }
 
-  onStoreChange() {
-    this.setState(this.getStateFromStore())
+  constructor(props) {
+    super(props)
   }
 
   changeOpenChat(user_id, to_user_id) {
-    MessagesAction.changeOpenChat(user_id, to_user_id)
+    // クリックしたユーザーのメッセージを取得するためにuser_id
+    // curretn_userが誰に送ったかわかるようにto_user_id
+    //　同じ値だから一つでもいい。
+    MessagesAction.changeOpenChat(user_id)
+    // MessagesAction.changeOpenChat(user_id, to_user_id)
   }
 
   deleteButton(id) { // 友達関係を削除
@@ -48,36 +32,38 @@ class UserList extends React.Component {
       .end((err, res) => {
         if (res) {
           console.log(res.body)
+          window.location.href = '/'
         } else {
           console.log(err.body)
         }
       })
     }
-    window.location.href = '/'
   }
 
   render() {
-    const users = this.state.userList.map((user) => {
+    const users = this.props.userList.map((user) => {
       const itemClasses = classNames({
-        'active-list': user.user.id === Number(this.state.openChatID),
+        'active-list': user.id === Number(this.props.openChatID),
       })
+
       return (
-        <li className = { itemClasses } key={user.user.id}>
+        <li className = { itemClasses } key={user.id}>
           <div className = 'user-list-list'>
             <div className = 'user-list__item__icon'>
-              { `${user.user.image}` === 'default_image' ? <img className='icon' src = { '/user_images/default_image.jpg' } /> : <img className='icon' src = {`/user_images/${user.user.id}.jpg`}/> }
+              { `${user.image}` === 'default_image' ? <img className='icon' src = { '/user_images/default_image.jpg' } /> : <img className='icon' src = {`/user_images/${user.id}.jpg`}/> }
             </div>
 
             <div
             className='user-list__item__name'
-            onClick={this.changeOpenChat.bind(this, user.user.id, user.user.id) }
+            onClick={this.changeOpenChat.bind(this, user.id) }
+            // onClick={this.changeOpenChat.bind(this, user.id, user.id) }
             >
-              { user.user.name }
+              { user.name }
             </div>
 
             <div
             className='delete_button'
-            onClick={ this.deleteButton.bind(this, user.user.id)}
+            onClick={ this.deleteButton.bind(this, user.id)}
             >
               ×
             </div>
@@ -97,9 +83,3 @@ class UserList extends React.Component {
 }
 
 export default UserList
-// componentWillMount() {
-// }
-
-// componentWillUnmount() {
-//   MessagesStore.offChange(this.onStoreChange.bind(this))
-// }

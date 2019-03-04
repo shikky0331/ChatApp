@@ -9,8 +9,7 @@
     = csrf_meta_tags
 
   %body
-    %p.alert.alert-notice= notice
-    %p.alert.alert-error= alert
+    = render 'layouts/flash'
     #user_name{:data => "current_user.name >"}
     - if user_signed_in?
       %header.header

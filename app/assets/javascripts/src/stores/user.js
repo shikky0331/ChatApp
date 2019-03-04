@@ -11,6 +11,24 @@ class UserStore extends BaseStore {
   setUsers(array) {
     this.set('userInfo', array)
   }
+
+  getCurrentUser() {
+    if (!this.get('current_userInfo')) this.setCurrentUser([])
+    return this.get('current_userInfo')
+  }
+
+  setCurrentUser(array) {
+    this.set('current_userInfo', array)
+  }
+  //
+  // getUserId() {
+  //   if (!this.get('userId')) this.setMessages([])
+  //   return this.get('userId')
+  // }
+  //
+  // setUserId(array) {
+  //   this.set('userId', array)
+  // }
 }
 
 const UsersStore = new UserStore()
@@ -21,6 +39,12 @@ UsersStore.dispatchToken = Dispatcher.register(payload => {
   switch (action.type) {
     case ActionTypes.GET_USERS:
       UsersStore.setUsers(action.json.users)
+      // UsersStore.setUserId(action.json.users.id)
+      UsersStore.emitChange()
+      break
+
+    case ActionTypes.GET_CURRENT_USER:
+      UsersStore.setCurrentUser(action.json.users)
       UsersStore.emitChange()
       break
 

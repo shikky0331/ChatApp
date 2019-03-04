@@ -36,8 +36,13 @@ class ReplyBox extends React.Component {
     MessagesAction.saveImage(e.target.files[0], this.state.to_user_id)
   }
 
+  componentDidMount() {
+    MessagesStore.onChange(this.onChangeHandler)
+  }
+
   onStoreChange() {
     this.setState({
+      // message送信時にto_user_idをDBに保存。
       to_user_id: MessagesStore.getToUserId(),
     })
   }
@@ -66,6 +71,3 @@ class ReplyBox extends React.Component {
 }
 
 export default ReplyBox
-// componentDidMount() {
-//   MessagesStore.onChange(this.onChangeHandler)
-// }

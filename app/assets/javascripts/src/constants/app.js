@@ -1,9 +1,11 @@
 import keyMirror from 'keymirror'
 
 export const ActionTypes = keyMirror({
-  GET_MESSAGES: null,
+  // GET_MESSAGES: null,
+  // GET_CURRENT_MESSAGES: null,
   SAVE_MESSAGE: null,
   GET_USERS: null,
+  // GET_CURRENT_USER: null,
   SEARCH_USERS: null,
   SAVE_IMAGE: null,
   SAVE_FRIEND: null,
@@ -22,3 +24,4 @@ export const APIEndpoints = {
   CURRENT_USER: APIRoot + '/current_users',
   FRIENDSHIPS: APIRoot + '/friendships',
 }
+// CURRENT_USERはUSERSに突っ込んでもよかったか？

@@ -30,10 +30,6 @@ export default class UserList extends React.Component {
     UsersStore.onChange(this.onStoreChange.bind(this))
   }
 
-  componentWillUnmount() {
-    UsersStore.offChange(this.onStoreChange.bind(this))
-  }
-
   onStoreChange() {
     this.setState(this.getStateFromStore())
   }

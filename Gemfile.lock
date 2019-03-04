@@ -38,6 +38,8 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     arel (6.0.4)
+    autoprefixer-rails (9.4.8)
+      execjs
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -45,6 +47,10 @@ GEM
     bcrypt (3.1.12)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
+    bootstrap (4.3.1)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 1.14.3, < 2)
+      sassc-rails (>= 2.0.0)
     browserify-rails (4.3.0)
       addressable (>= 2.4.0)
       railties (>= 4.0.0)
@@ -116,6 +122,7 @@ GEM
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
+    popper_js (1.14.5)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -186,6 +193,15 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sassc (2.0.0)
+      ffi (~> 1.9.6)
+      rake
+    sassc-rails (2.1.0)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -225,6 +241,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap
   browserify-rails
   byebug
   coffee-rails (~> 4.1.0)

@@ -8,40 +8,45 @@ class Api::MessagesController < ApplicationController
     if params[:user_id]
 
       # 1 クリックしたユーザーのメッセージを取得
-      user_id_message =
       click_user_messages = Message.where(user_id: params[:user_id])
 
       # 2 クリックしたユーザーがcurrent_userに送ったメッセージを取得
       click_user_to_current_user = click_user_messages.where(to_user_id: current_user.id)
 
       # 3 current_userがクリックしたユーザに送ったメッセージを取得
-      current_user_to_message = current_user.messages.where(to_user_id: params[:to_user_id])
+      current_user_to_message = current_user.messages.where(to_user_id: params[:user_id])
 
       # 2と3のメッセージを取得
       messages = current_user_to_message +   click_user_to_current_user
 
-      to_user_id = params[:user_id]
+      # to_user_id = params[:user_id]
 
       render json: {
         messages: messages.sort,
-        to_user_id: to_user_id
+        to_user_id: params[:user_id]
       }
     else
-      messages = Message.all
-      render json: {
-        messages: messages
-      }
+      # 厳しいか userごとのmessage.lastのreadをとりたい。
+      # current_userの友達の全てのmessageを取得
+      friends_messages =  Message.where(user_id: current_user.friends).where(to_user_id: current_user)
+
+      # 友達ごとにmessageを分ける
+      messages = friends_messages.all.group_by { |user| [user[:user_id]] }
+
+      render json: messages
     end
   end
 
   def create
+    if params[:to_user_id]
       message = Message.create(
       content: params[:content],
       user_id: current_user.id,
       to_user_id: params[:to_user_id],
-      timestamp: Time.now.to_i
+      timestamp: Time.now.to_i,
     )
-    render json: message
+      render json: message
+    end
   end
 
   def image
@@ -66,4 +71,12 @@ class Api::MessagesController < ApplicationController
 
     render json: message
   end
+
+  # def current_messages
+  #   messages = current_user.messages
+  #   render json: {
+  #     messages: messages
+  #   }
+  # end
+
 end

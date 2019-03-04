@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/users/search', to: 'searches#index'
   get '/api/users/search', to: 'api/users#search'
   post '/api/messages/image', to: 'api/messages#image'
+  get '/api/messages/current_messages', to: 'api/messages#current_messages'
 
   # get '/users/show/:id', to: 'users#show'
 

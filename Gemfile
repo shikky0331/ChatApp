@@ -19,6 +19,7 @@ gem 'devise-i18n'
 gem 'rails-i18n'
 gem 'rmagick'
 gem 'mini_magick'
+gem 'bootstrap'
 
 
 group :development, :test do
