@@ -23,7 +23,7 @@ class MessagesBox extends React.Component {
   }
 
   render() {
-    const notice = "ユーザーをクリックしてチャットを始めよう"
+    const notice = "ユーザーをクリックしてからメッセージを送ってね"
 
     const currentUserID = this.props.currentUser
 
