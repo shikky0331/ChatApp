@@ -8,7 +8,6 @@
     bottom: 67px;
     padding: 30px;
     overflow-y: scroll;
-    z-index: 1;
   }
 
   &__item {
@@ -51,11 +50,18 @@
   }
 }
 
+.notice-box {
+  position: absolute;
+  top: 80px;
+  left: 320px;
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  color: #2c2c2f;
+  background:  #f0f7ff;
+  border: dashed 2px #5b8bd0;
+}
+
 .image-message {
   height: 250px;
   width: 250px;
-}
-
-.message-box__item clear {
-
 }

@@ -23,6 +23,8 @@ class MessagesBox extends React.Component {
   }
 
   render() {
+    const notice = "ユーザーをクリックしてチャットを始めよう"
+
     const currentUserID = this.props.currentUser
 
     const messages = this.props.userMessageList.map((messages, index) => {
@@ -48,6 +50,12 @@ class MessagesBox extends React.Component {
             <div ref={(el) => { this.messagesEnd = el }}>
             </div>
           </ul>
+          <div
+          className='notice-box'
+          style={{ display: this.props.openChatID ? 'none' : '' }}
+          >
+            { notice }
+          </div>
           <ReplyBox />
         </div>
       )

@@ -20,7 +20,7 @@ class UserList extends React.Component {
   changeOpenChat(user_id, to_user_id) {
     // クリックしたユーザーのメッセージを取得するためにuser_id
     // curretn_userが誰に送ったかわかるようにto_user_id
-    //　同じ値だから一つでもいい。
+    // 同じ値だから一つでもいい。
     MessagesAction.changeOpenChat(user_id)
     // MessagesAction.changeOpenChat(user_id, to_user_id)
   }

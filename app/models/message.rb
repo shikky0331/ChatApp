@@ -3,5 +3,6 @@ class Message < ActiveRecord::Base
   default_scope -> { order(created_at: :asc) }
 
   validates :content, presence: true
+  validates :to_user_id, presence: true
 
 end
