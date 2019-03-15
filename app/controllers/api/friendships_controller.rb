@@ -1,5 +1,4 @@
 class Api::FriendshipsController < ApplicationController
-  require "User.rb"
   protect_from_forgery :except => [:destroy]
 
   # def index
