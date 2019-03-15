@@ -1,4 +1,3 @@
-require "User.rb"
 class Api::UsersController < ApplicationController
 
   def index
