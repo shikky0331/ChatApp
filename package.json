@@ -11,7 +11,7 @@
     "watch:hot": "npm run lint && watchify app/assets/javascripts/src/boot.js -t babelify --extension=\".js.jsx\" -d -p livereactload -o public/assets/javascripts/boot.js -v",
     "lint": "eslint ./app/assets/javascripts/src",
     "lint:fix": "npm run lint -- --fix",
-    "start": "node src/app.js",
+    "start": "rails s",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
