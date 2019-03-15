@@ -1,7 +1,6 @@
 import React from 'react'
 import UserList from './userList'
 import MessagesBox from './messagesBox'
-import MessagesAction from '../../actions/messages'
 import UsersAction from '../../actions/users'
 import MessagesStore from '../../stores/messages'
 import UsersStore from '../../stores/user'
@@ -21,7 +20,7 @@ class App extends React.Component {
   getStateFromStore() {
     return {
       userList: UsersStore.getUsers(),
-      // messageboxのcurrent classを付けるため　curretnUserId
+      // messageboxのcurrent/classを付けるため/curretnUserId
       currentUser: UsersStore.getCurrentUser(),
       // active-listをつけるため
       openChatID: MessagesStore.getToUserId(),

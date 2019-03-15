@@ -17,7 +17,7 @@ class UserList extends React.Component {
     super(props)
   }
 
-  changeOpenChat(user_id, to_user_id) {
+  changeOpenChat(user_id) {
     // クリックしたユーザーのメッセージを取得するためにuser_id
     // curretn_userが誰に送ったかわかるようにto_user_id
     // 同じ値だから一つでもいい。
@@ -70,7 +70,8 @@ class UserList extends React.Component {
           </div>
         </li>
       )
-    }, this)
+    })
+    // }, this)
 
     return (
       <div className='user-list'>

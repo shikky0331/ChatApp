@@ -5,7 +5,7 @@ export const ActionTypes = keyMirror({
   // GET_CURRENT_MESSAGES: null,
   SAVE_MESSAGE: null,
   GET_USERS: null,
-  // GET_CURRENT_USER: null,
+  GET_CURRENT_USER: null,
   SEARCH_USERS: null,
   SAVE_IMAGE: null,
   SAVE_FRIEND: null,

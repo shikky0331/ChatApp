@@ -7,6 +7,7 @@ class MessagesBox extends React.Component {
     return {
       currentUser: React.PropTypes.object,
       userMessageList: React.PropTypes.array,
+      openChatID: React.PropTypes.integer,
     }
   }
 
@@ -17,13 +18,17 @@ class MessagesBox extends React.Component {
   componentDidUpdate() {
     this.scrollToBottom()
   }
+  // didmountでは動かない
+  // componentDidMount() {
+  //   this.scrollToBottom()
+  // }
 
   scrollToBottom() {
     this.messagesEnd.scrollIntoView({behavior: 'smooth'})
   }
 
   render() {
-    const notice = "ユーザーをクリックしてからメッセージを送ってね"
+    const notice = 'ユーザーをクリックしてからメッセージを送ってね'
 
     const currentUserID = this.props.currentUser
 
