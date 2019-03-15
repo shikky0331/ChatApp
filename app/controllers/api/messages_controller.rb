@@ -1,5 +1,5 @@
 class Api::MessagesController < ApplicationController
-  require "User.rb"
+  # require "User.rb"
   require 'rubygems'
   require 'RMagick'
   protect_from_forgery :except => [:image]
