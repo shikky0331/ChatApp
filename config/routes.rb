@@ -21,5 +21,4 @@ Rails.application.routes.draw do
   get '/api/messages/current_messages', to: 'api/messages#current_messages'
 
   # get '/users/show/:id', to: 'users#show'
-
 end
