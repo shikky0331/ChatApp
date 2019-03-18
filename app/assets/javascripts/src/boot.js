@@ -15,10 +15,3 @@ $(() => {
 
   page({click: false})
 })
-
-// $(() => {
-//   const userRouter = new UserRouter()
-//   userRouter.register()
-//
-//   page({click: false})
-// })
