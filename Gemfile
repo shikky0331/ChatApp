@@ -6,7 +6,7 @@ gem 'rails', '4.2.8'
 gem 'haml-rails'
 gem 'erb2haml'
 gem "browserify-rails"
-gem 'sprockets-es6'
+gem 'sprockets-es6', require: 'sprockets/es6'
 gem 'react-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
