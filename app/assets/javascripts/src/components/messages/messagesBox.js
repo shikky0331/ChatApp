@@ -1,75 +1,69 @@
 import React from 'react'
 import classNames from 'classNames'
-import MessagesStore from '../../stores/messages'
 import ReplyBox from '../../components/messages/replyBox'
-import UserStore from '../../stores/user'
-import Utils from '../../utils'
 
 class MessagesBox extends React.Component {
+  static get propTypes() {
+    return {
+      currentUser: React.PropTypes.object,
+      userMessageList: React.PropTypes.array,
+      openChatID: React.PropTypes.integer,
+    }
+  }
 
   constructor(props) {
     super(props)
-    this.state = this.initialState
-  } //  メッセージの情報
-  get initialState() {
-    return this.getStateFromStore()
   }
-  getStateFromStore() {
-    return MessagesStore.getChatByUserID(MessagesStore.getOpenChatUserID())
-  }// UserIdを引数にとって、その人のメッセージ情報とる
-  componentWillMount() {
-    MessagesStore.onChange(this.onStoreChange.bind(this))
+
+  componentDidUpdate() {
+    this.scrollToBottom()
   }
-  componentWillUnmount() {
-    MessagesStore.offChange(this.onStoreChange.bind(this))
+  // didmountでは動かない
+  // componentDidMount() {
+  //   this.scrollToBottom()
+  // }
+
+  scrollToBottom() {
+    this.messagesEnd.scrollIntoView({behavior: 'smooth'})
   }
-  onStoreChange() {
-    this.setState(this.getStateFromStore())
-  }// 新しいメッセージ情報に書き換える
 
   render() {
-    const messagesLength = this.state.messages.length //  2 {[contents from timestamp] 配列が二つ }
-    const currentUserID = UserStore.user.id
+    const notice = 'ユーザーをクリックしてからメッセージを送ってね'
 
-    const messages = this.state.messages.map((message, index) => {
+    const currentUserID = this.props.currentUser
+
+    const messages = this.props.userMessageList.map((messages, index) => {
       const messageClasses = classNames({
         'message-box__item': true,
-        'message-box__item--from-current': message.from === currentUserID,
+        'message-box__item--from-current': messages.user_id === currentUserID.id,
         'clear': true,
       })
 
       return (
-          <li key={ message.timestamp + '-' + message.from } className={ messageClasses }>
+          <li key={ messages.id } className={ messageClasses }>
             <div className='message-box__item__contents'>
-              { message.contents }
+            { (messages.image === null) ? messages.content : <img className='image-message' src = {`/message_images/${messages.id}.jpg`}/> }
             </div>
           </li>
         )
     })
 
-    const lastMessage = this.state.messages[messagesLength - 1]
-
-    if (lastMessage.from === currentUserID) {
-      if (this.state.lastAccess.recipient >= lastMessage.timestamp) {
-        const date = Utils.getShortDate(lastMessage.timestamp)
-        messages.push(
-            <li key='read' className='message-box__item message-box__item--read'>
-              <div className='message-box__item__contents'>
-                Read { date }
-              </div>
-            </li>
-          )
-      }
-    }
     return (
         <div className='message-box'>
           <ul className='message-box__list'>
             { messages }
+            <div ref={(el) => { this.messagesEnd = el }}>
+            </div>
           </ul>
-          <ReplyBox />,
+          <div
+          className='notice-box'
+          style={{ display: this.props.openChatID ? 'none' : '' }}
+          >
+            { notice }
+          </div>
+          <ReplyBox />
         </div>
       )
-  } //  メッセージと送信ボックスを描画
+  }
 }
-
 export default MessagesBox

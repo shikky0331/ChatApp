@@ -7,11 +7,12 @@
     "test": "test"
   },
   "scripts": {
-    "build": "browserify app/assets/javascripts/src/boot.js -t babelify/browserify-incremental --extension=\".js.jsx\" -o public/assets/javascripts/boot.js",
     "watch": "npm run lint:fix && watchify app/assets/javascripts/src/boot.js  -t babelify --extension=\".js.jsx\" -d -o public/assets/javascripts/boot.js -v",
     "watch:hot": "npm run lint && watchify app/assets/javascripts/src/boot.js -t babelify --extension=\".js.jsx\" -d -p livereactload -o public/assets/javascripts/boot.js -v",
     "lint": "eslint ./app/assets/javascripts/src",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "start": "npm run watch & rails s ",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",
@@ -29,7 +30,7 @@
     "babel-core": "^6.3.21",
     "babel-eslint": "^5.0.4",
     "babel-plugin-react-transform": "^2.0.0",
-    "babel-polyfill": "^6.3.14",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.1.2",
     "babel-preset-react": "^6.1.2",
     "babelify": "^7.2.0",
@@ -59,9 +60,12 @@
     "react-dnd": "^2.0.2",
     "react-dnd-html5-backend": "^2.0.2",
     "react-dom": "0.14.7",
+    "react-file-input": "^0.2.5",
     "react-modal": "^0.6.0",
+    "react-router-dom": "^4.3.1",
     "react-slick": "^0.12.0",
     "react-tap-event-plugin": "^0.2.1",
+    "reactify": "^1.1.1",
     "reveal.js": "3.2.0",
     "socket.io-client": "^1.4.5",
     "superagent": "^1.6.1",
@@ -70,7 +74,7 @@
     "zeroclipboard": "2.2.0"
   },
   "engines": {
-    "node": "0.10.x",
-    "npm": "2.1.x"
+    "node": "8.12.0",
+    "npm": "6.4.1"
   }
 }

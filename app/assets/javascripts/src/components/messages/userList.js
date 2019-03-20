@@ -1,117 +1,82 @@
 import React from 'react'
-import _ from 'lodash'
 import classNames from 'classnames'
-import Utils from '../../utils'
-import MessagesStore from '../../stores/messages'
-import UserStore from '../../stores/user'
 import MessagesAction from '../../actions/messages'
+import {APIEndpoints} from '../../constants/app'
+import request from 'superagent'
 
 class UserList extends React.Component {
+  static get propTypes() {
+    return {
+      userList: React.PropTypes.array,
+      messageList: React.PropTypes.array,
+      openChatID: React.PropTypes.function,
+    }
+  }
 
   constructor(props) {
     super(props)
-    this.state = this.initialState
-  }//
-    get initialState() {
-      return this.getStateFromStore()
-    }
-  // get initialState() {
-  //   const allMessages = MessagesStore.getAllChats()
-  //   // chatの情報を全てとる
-    getStateFromStore() {
-      const allMessages = MessagesStore.getAllChats()
-
-      const messageList = []
-      _.each(allMessages, (message) => {
-        const messagesLength = message.messages.length
-        messageList.push({
-          lastMessage: message.messages[messagesLength - 1],
-          lastAccess: message.lastAccess,
-          user: message.user,
-        })// 第２引数に渡した関数が都度実行される
-      })
-      return {
-        openChatID: MessagesStore.getOpenChatUserID(),
-        messageList: messageList,
-      }
-    }
-    componentWillMount() {
-      MessagesStore.onChange(this.onStoreChange.bind(this))
-    }
-    componentWillUnmount() {
-      MessagesStore.offChange(this.onStoreChange.bind(this))
-    }
-    onStoreChange() {
-      this.setState(this.getStateFromStore())
-    }
-  changeOpenChat(id) {
-    MessagesAction.changeOpenChat(id)
   }
+
+  changeOpenChat(user_id) {
+    // クリックしたユーザーのメッセージを取得するためにuser_id
+    // curretn_userが誰に送ったかわかるようにto_user_id
+    // 同じ値だから一つでもいい。
+    MessagesAction.changeOpenChat(user_id)
+    // MessagesAction.changeOpenChat(user_id, to_user_id)
+  }
+
+  deleteButton(id) { // 友達関係を削除
+    if (window.confirm('本当に削除しますか？(チャットの履歴は残ります。)')) {
+      request
+      .del(`${APIEndpoints.FRIENDSHIPS}/${id}`)
+      .end((err, res) => {
+        if (res) {
+          console.log(res.body)
+          window.location.href = '/'
+        } else {
+          console.log(err.body)
+        }
+      })
+    }
+  }
+
   render() {
-    this.state.messageList.sort((a, b) => {
-      if (a.lastMessage.timestamp > b.lastMessage.timestamp) {
-        return -1
-      }
-      if (a.lastMessage.timestamp < b.lastMessage.timestamp) {
-        return 1
-      }
-      return 0
-    })
-
-    const messages = this.state.messageList.map((message, index) => {
-      const date = Utils.getNiceDate(message.lastMessage.timestamp)
-
-      var statusIcon
-      if (message.lastMessage.from !== message.user.id) {
-        statusIcon = (
-          <i className='fa fa-reply user-list__item__icon' />
-        )
-      }
-      if (message.lastAccess.currentUser < message.lastMessage.timestamp) {
-        statusIcon = (
-          <i className='fa fa-circle user-list__item__icon' />
-        )
-      }
-
-      var isNewMessage = false
-      if (message.lastAccess.currentUser < message.lastMessage.timestamp) {
-        isNewMessage = message.lastMessage.from !== UserStore.user.id
-      }
-
+    const users = this.props.userList.map((user) => {
       const itemClasses = classNames({
-        'user-list__item': true,
-        'clear': true,
-        'user-list__item--new': isNewMessage,
-        'user-list__item--active': this.state.openChatID === message.user.id,
+        'active-list': user.id === Number(this.props.openChatID),
       })
 
       return (
-        <li
-          onClick={ this.changeOpenChat.bind(this, message.user.id) }// ユーザがクリックしたユーザIDでchangeOpenChatメソッドを呼ぶ
-          className={ itemClasses }
-          key={ message.user.id }
-        >
-          <div className='user-list__item__picture'>
-            <img src={ message.user.profilePicture } />
-          </div>
-          <div className='user-list__item__details'>
-            <h4 className='user-list__item__name'>
-              { message.user.name }
-              <abbr className='user-list__item__timestamp'>
-                { date }
-              </abbr>
-            </h4>
-            <span className='user-list__item__message'>
-              { statusIcon } { message.lastMessage.contents }
-            </span>
+        <li className = { itemClasses } key={user.id}>
+          <div className = 'user-list-list'>
+            <div className = 'user-list__item__icon'>
+              { `${user.image}` === 'default_image' ? <img className='icon' src = { '/user_images/default_image.jpg' } /> : <img className='icon' src = {`/user_images/${user.id}.jpg`}/> }
+            </div>
+
+            <div
+            className='user-list__item__name'
+            onClick={this.changeOpenChat.bind(this, user.id) }
+            // onClick={this.changeOpenChat.bind(this, user.id, user.id) }
+            >
+              { user.name }
+            </div>
+
+            <div
+            className='delete_button'
+            onClick={ this.deleteButton.bind(this, user.id)}
+            >
+              ×
+            </div>
           </div>
         </li>
       )
-    }, this)
+    })
+    // }, this)
+
     return (
       <div className='user-list'>
         <ul className='user-list__list'>
-          { messages }
+          { users }
         </ul>
       </div>
     )

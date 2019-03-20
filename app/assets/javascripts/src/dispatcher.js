@@ -16,7 +16,5 @@ const appDispatcher = assign(new Dispatcher(), {
     })
   },
 })
-//  appDispatcher = new Dispatcher()インスタンスに
-//  handleViewAction handleServerActionの機能を持たせた
 
 export default appDispatcher

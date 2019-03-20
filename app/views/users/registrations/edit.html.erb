@@ -1,0 +1,46 @@
+<div id=''></div>
+<div class='edit_wrapper'>
+
+  <h2 class='edit_user_title'><%= t('プロフィール編集', resource: resource.model_name.human) %></h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: 'edit_user',html: { method: :put, multipart: true }) do |f| %>
+
+    <%= devise_error_messages! %>
+
+    <%= f.file_field :image %>
+
+    <div class="field">
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= f.email_field :email, autofocus: true, autocomplete:
+      "email", class: 'form-control' %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div><%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email)%></div>
+    <% end %>
+
+    <div class="field">
+      <div class="field">
+        <%= f.password_field :current_password, autocomplete: "current-password", placeholder: '現在のパスワード (変更を反映するには現在のパスワードを入力してください)', class: 'form-control'%>
+      </div>
+
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: '新しいパスワード（6文字以上)', class: 'form-control' %>
+      <% if @minimum_password_length %>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: '新しいパスワードの確認', class: 'form-control' %>
+    </div>
+
+
+    <div class="actions">
+      <%= f.submit t('.update', default: '編集'), class: "btn btn-info update_btn"%>
+    </div>
+  <% end %>
+
+  <p><%= button_to t('.cancel_my_account', default: 'アカウント削除'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete, class: "btn_1 btn-danger user_destroy_btn" %></p>
+</div>
