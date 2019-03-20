@@ -1,6 +1,6 @@
 ChatApp
 ====
-shikky0331/ChatAppはRuby on Rails とReact.jsを組み合わせたチャットアプリです。
+ChatAppはRuby on Rails とReact.jsを組み合わせたチャットアプリです。
 ## Description
 - 機能  
   - １対１のチャット  
