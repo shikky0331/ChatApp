@@ -15,4 +15,3 @@ $(() => {
 
   page({click: false})
 })
-;
