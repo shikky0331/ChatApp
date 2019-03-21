@@ -1,6 +1,7 @@
 ChatApp
 ====
-ChatAppはRuby on Rails とReact.jsを組み合わせたチャットアプリです。
+ChatAppはRuby on Rails とReact.jsを組み合わせたチャットアプリです。  
+https://chat-app-pro.herokuapp.com/users/sign_up
 
 ## Requirement
 * Rails 4.2.8
@@ -28,7 +29,7 @@ $ bundle install
 $ npm install
 $ npm run start
 ```
-http://localhost:3000 にアクセス。 
+http://localhost:3000 にアクセス。  
 ※nodebrew,node,npmをインストールしてない人はインストール必要。
 
 ## Usage
