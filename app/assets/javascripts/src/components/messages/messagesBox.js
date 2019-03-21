@@ -18,10 +18,6 @@ class MessagesBox extends React.Component {
   componentDidUpdate() {
     this.scrollToBottom()
   }
-  // didmountでは動かない
-  // componentDidMount() {
-  //   this.scrollToBottom()
-  // }
 
   scrollToBottom() {
     this.messagesEnd.scrollIntoView({behavior: 'smooth'})

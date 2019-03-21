@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, module: :users
   resource :users, only: [:show, :edit, :destroy] do
-  # resource :users, only: [:edit, :destroy] do
+    
     member do
       get :from_user, :to_user
     end
@@ -19,6 +19,4 @@ Rails.application.routes.draw do
   get '/api/users/search', to: 'api/users#search'
   post '/api/messages/image', to: 'api/messages#image'
   get '/api/messages/current_messages', to: 'api/messages#current_messages'
-
-  # get '/users/show/:id', to: 'users#show'
 end

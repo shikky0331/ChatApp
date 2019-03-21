@@ -64,13 +64,11 @@ export default{
       })
     })
   },
-  // changeOpenChat(user_id, to_user_id) {
   changeOpenChat(user_id) {
     return new Promise((resolve, reject) => {
       request
      .get(APIEndpoints.MESSAGES)
      .query({user_id})
-     // .query({to_user_id})
      .end((error, res) => {
        if (!error && res.status === 200) {
          const json = JSON.parse(res.text)
@@ -86,39 +84,3 @@ export default{
     })
   },
 }
-// getUserLastMessages() {
-//   return new Promise((resolve, reject) => {
-//     request
-//    .get(APIEndpoints.MESSAGES)
-//    .end((error, res) => {
-//      if (!error && res.status === 200) {
-//        const json = JSON.parse(res.text)
-//        Dispatcher.handleServerAction({
-//          type: ActionTypes.GET_MESSAGES,
-//          json,
-//        })
-//        resolve(json)
-//      } else {
-//        reject(res)
-//      }
-//    })
-//   })
-// },
-// getCurrentMessages() {
-//   return new Promise((resolve, reject) => {
-//     request
-//    .get(`${APIEndpoints.MESSAGES}/current_messages`)
-//    .end((error, res) => {
-//      if (!error && res.status === 200) {
-//        const json = JSON.parse(res.text)
-//        Dispatcher.handleServerAction({
-//          type: ActionTypes.GET_CURRENT_MESSAGES,
-//          json,
-//        })
-//        resolve(json)
-//      } else {
-//        reject(res)
-//      }
-//    })
-//   })
-// },

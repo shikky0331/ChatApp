@@ -1,13 +1,6 @@
 class Api::FriendshipsController < ApplicationController
   protect_from_forgery :except => [:destroy]
 
-  # def index
-  #   friendship = Friendship.all
-  #   render json: {
-  #     friendships: friendship
-  #   }
-  # end
-
   def create
    friendship = Friendship.new(
      from_user_id: current_user.id,

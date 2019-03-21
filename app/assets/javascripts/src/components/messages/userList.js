@@ -18,14 +18,10 @@ class UserList extends React.Component {
   }
 
   changeOpenChat(user_id) {
-    // クリックしたユーザーのメッセージを取得するためにuser_id
-    // curretn_userが誰に送ったかわかるようにto_user_id
-    // 同じ値だから一つでもいい。
     MessagesAction.changeOpenChat(user_id)
-    // MessagesAction.changeOpenChat(user_id, to_user_id)
   }
 
-  deleteButton(id) { // 友達関係を削除
+  friendDelete(id) {
     if (window.confirm('本当に削除しますか？(チャットの履歴は残ります。)')) {
       request
       .del(`${APIEndpoints.FRIENDSHIPS}/${id}`)
@@ -56,14 +52,13 @@ class UserList extends React.Component {
             <div
             className='user-list__item__name'
             onClick={this.changeOpenChat.bind(this, user.id) }
-            // onClick={this.changeOpenChat.bind(this, user.id, user.id) }
             >
               { user.name }
             </div>
 
             <div
             className='delete_button'
-            onClick={ this.deleteButton.bind(this, user.id)}
+            onClick={ this.friendDelete.bind(this, user.id)}
             >
               ×
             </div>
@@ -71,7 +66,6 @@ class UserList extends React.Component {
         </li>
       )
     })
-    // }, this)
 
     return (
       <div className='user-list'>

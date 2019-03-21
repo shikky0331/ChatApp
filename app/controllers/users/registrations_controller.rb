@@ -23,7 +23,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     super
 
-    # current_passwordã�®ç¢ºèª�
     unless @user.valid_password?(params[:user][:current_password])
     end
 

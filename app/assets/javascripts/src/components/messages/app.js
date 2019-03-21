@@ -4,7 +4,6 @@ import MessagesBox from './messagesBox'
 import UsersAction from '../../actions/users'
 import MessagesStore from '../../stores/messages'
 import UsersStore from '../../stores/user'
-// import _ from 'lodash'
 
 class App extends React.Component {
   constructor(props) {
@@ -25,9 +24,6 @@ class App extends React.Component {
       // active-listをつけるため
       openChatID: MessagesStore.getToUserId(),
       userMessageList: MessagesStore.getUserMessages(),
-      // allMessageList: MessagesStore.getAllMessages(),
-      // userLastMessage:
-      // currentMessageList: MessagesStore.getCurrentMessages(),
     }
   }
 
@@ -53,10 +49,3 @@ class App extends React.Component {
 }
 
 export default App
-// const allMessages = MessagesStore.getMessages()
-// const messageList = []
-// _.each(allMessages, (message) => {
-//   messageList.push({
-//     message: message,
-//   })
-// })

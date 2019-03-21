@@ -21,7 +21,6 @@ class Search extends React.Component {
     }
 
     render() {
-      // 検索フォームに打ったメッセージを表示するため
       const {name} = this.state
       return (
         <div className='search'>

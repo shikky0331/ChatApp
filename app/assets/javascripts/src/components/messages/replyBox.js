@@ -42,7 +42,6 @@ class ReplyBox extends React.Component {
 
   onStoreChange() {
     this.setState({
-      // message送信時にto_user_idをDBに保存。
       to_user_id: MessagesStore.getToUserId(),
     })
   }

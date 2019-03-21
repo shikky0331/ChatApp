@@ -18,21 +18,10 @@ class Api::MessagesController < ApplicationController
       # 2と3のメッセージを取得
       messages = current_user_to_message +   click_user_to_current_user
 
-      # to_user_id = params[:user_id]
-
       render json: {
         messages: messages.sort,
         to_user_id: params[:user_id]
       }
-    else
-      # 厳しいか userごとのmessage.lastのreadをとりたい。
-      # current_userの友達の全てのmessageを取得
-      friends_messages =  Message.where(user_id: current_user.friends).where(to_user_id: current_user)
-
-      # 友達ごとにmessageを分ける
-      messages = friends_messages.all.group_by { |user| [user[:user_id]] }
-
-      render json: messages
     end
   end
 
@@ -70,12 +59,4 @@ class Api::MessagesController < ApplicationController
 
     render json: message
   end
-
-  # def current_messages
-  #   messages = current_user.messages
-  #   render json: {
-  #     messages: messages
-  #   }
-  # end
-
 end
