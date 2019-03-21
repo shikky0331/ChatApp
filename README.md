@@ -3,7 +3,10 @@ ChatApp
 ChatAppはRuby on Rails とReact.jsを組み合わせたチャットアプリです。
 
 ## Requirement
+* Rails 4.2.8
+* Ruby 2.6.0
 
+and see Gemfile and package.json
 ## Description
 - 機能  
   - １対１のチャット  
