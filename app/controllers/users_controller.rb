@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find_by(id: current_user.id)
+    @user = current_user
   end
 
   def edit
-    @user = User.find_by(id: current_user.id)
+    @user = current_user
   end
 
 end

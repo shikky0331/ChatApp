@@ -8,6 +8,7 @@ class Api::FriendshipsController < ApplicationController
    )
 
    friendship.save
+
    render json: friendship
   end
 
@@ -16,7 +17,7 @@ class Api::FriendshipsController < ApplicationController
     from_user_friendship = current_user.friendships_of_from_user.find_by(to_user_id: params[:id])
 
    # current_userが友達申請されたユーザの中から　削除したい関係を検索
-    to_user_friendship =  current_user.friendships_of_to_user.find_by(from_user_id: params[:id])
+    to_user_friendship = current_user.friendships_of_to_user.find_by(from_user_id: params[:id])
 
     # どちらかはnilに必ずなる
       if from_user_friendship.nil?

@@ -6,17 +6,17 @@ class Api::MessagesController < ApplicationController
   def index
     if params[:user_id]
 
-      # 1 クリックしたユーザーのメッセージを取得
-      click_user_messages = Message.where(user_id: params[:user_id])
+      # クリックしたユーザーのメッセージを取得
+      user_messages = Message.where(user_id: params[:user_id])
 
-      # 2 クリックしたユーザーがcurrent_userに送ったメッセージを取得
-      click_user_to_current_user = click_user_messages.where(to_user_id: current_user.id)
+      # クリックしたユーザーがcurrent_userに送ったメッセージを取得
+      toCurrent_user_messages = user_messages.where(to_user_id: current_user.id)
 
-      # 3 current_userがクリックしたユーザに送ったメッセージを取得
-      current_user_to_message = current_user.messages.where(to_user_id: params[:user_id])
+      # current_userがクリックしたユーザに送ったメッセージを取得
+      toUser_messages = current_user.messages.where(to_user_id: params[:user_id])
 
-      # 2と3のメッセージを取得
-      messages = current_user_to_message +   click_user_to_current_user
+      # メッセージを取得
+      messages = toUser_messages +   toCurrent_user_messages
 
       render json: {
         messages: messages.sort,
@@ -54,7 +54,7 @@ class Api::MessagesController < ApplicationController
       to_user_id: params[:to_user_id],
       user_id: current_user.id
     )
-
+    #   validates :content, presence: trueを回避
     message.save(validate: false)
 
     render json: message
